@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/Font">
+        <file>Resur/iconfont.ttf</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>qtquickcontrols2.conf</file>
+    </qresource>
+</RCC>
