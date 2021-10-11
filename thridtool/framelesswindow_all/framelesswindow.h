@@ -2,7 +2,9 @@
 #define FRAMELESSWINDOW_H
 
 #include <QQuickWindow>
-
+#include<QApplication>
+#include<QScreen>
+#include<QDebug>
 class FramelessWindow : public QQuickWindow
 {
     Q_OBJECT
@@ -32,15 +34,19 @@ public:
     bool resizable() const;
     void setResizable(bool arg);
 
+
+
 protected:
     void mousePressEvent(QMouseEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;
     void mouseDoubleClickEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
+public slots:
 
 signals:
     void movableChanged();
     void resizableChanged();
+
 
 private:
     MouseArea getArea(const QPoint &pos);
@@ -49,6 +55,8 @@ private:
 
     bool m_movable = true;
     bool m_resizable = true;
+
+
     MouseArea m_currentArea = Move;
     QPoint m_startPos;
     QPoint m_oldPos;

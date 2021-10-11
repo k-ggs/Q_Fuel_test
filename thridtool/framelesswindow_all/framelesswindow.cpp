@@ -13,6 +13,7 @@ FramelessWindow::FramelessWindow(QWindow *parent)
    });
 }
 
+
 bool FramelessWindow::movable() const
 {
     return m_movable;
@@ -38,6 +39,9 @@ void FramelessWindow::setResizable(bool arg)
         emit resizableChanged();
     }
 }
+
+
+
 
 void FramelessWindow::mousePressEvent(QMouseEvent *event)
 {

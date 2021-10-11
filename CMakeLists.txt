@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14)
+﻿cmake_minimum_required(VERSION 3.14)
 
 project(Q_Fuel_test LANGUAGES CXX)
 
@@ -24,8 +24,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #    endif()
 #endif()
 
-find_package(QT NAMES Qt6 Qt5 COMPONENTS      Core Quick Qml quickcontrols2 serialbus serialport Widgets REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Qml quickcontrols2 serialbus serialport Widgets REQUIRED)
+find_package(QT NAMES Qt6 Qt5 COMPONENTS      Core gui Quick Qml printsupport quickcontrols2 serialbus serialport Widgets REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core gui Quick Qml printsupport quickcontrols2 serialbus serialport Widgets REQUIRED)
 
 set(PROJECT_SOURCES
         main.cpp
@@ -34,9 +34,14 @@ set(PROJECT_SOURCES
 )
 include_directories(
     thridtool/framelesswindow_all
+    thridtool/QCustomPlot/qcustomplot
+    thridtool/QCustomPlot/qcustomplotapi
+
     )
 file(GLOB soucres
     "thridtool/framelesswindow_all/*cpp"
+    "thridtool/QCustomPlot/qcustomplot/*cpp"
+      "thridtool/QCustomPlot/qcustomplotapi/*cpp"
     )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -64,4 +69,5 @@ target_link_libraries(Q_Fuel_test
   Qt${QT_VERSION_MAJOR}::Quick
   Qt${QT_VERSION_MAJOR}::SerialBus
   Qt${QT_VERSION_MAJOR}::Widgets
+   Qt${QT_VERSION_MAJOR}::PrintSupport
   )
