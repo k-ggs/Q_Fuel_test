@@ -57,12 +57,15 @@ include_directories(
     thridtool/framelesswindow_all
     thridtool/QCustomPlot/qcustomplot
     thridtool/QCustomPlot/qcustomplotapi
-
+ thridtool/QCustomPlot/qcustomplot/Anvedi
+  thridtool/QCustomPlot/qcustomplot/Anvedi/qml-lib
     )
 file(GLOB soucres
     "thridtool/framelesswindow_all/*cpp"
     "thridtool/QCustomPlot/qcustomplot/*cpp"
       "thridtool/QCustomPlot/qcustomplotapi/*cpp"
+     "thridtool/QCustomPlot/qcustomplot/Anvedi/*cpp"
+      "thridtool/QCustomPlot/qcustomplot/Anvedi/qml-lib/*cpp"
     )
 
 

@@ -10,6 +10,7 @@
 #include "QuickTool/QuickTool.h"
 #include "Trans/Trans.h"
 #include"qcustom_api.h"
+#include"RegisterAll.h"
 #ifdef QMAKE_GEN_TAOMACRO
     #include "taoMacro.h"
 #endif
@@ -23,6 +24,7 @@ int main(int argc, char *argv[])
 
 
     QQmlApplicationEngine engine;
+    QmlModulesInstaller::Install();
     QFontDatabase::addApplicationFont(":/Font/Resur/iconfont.ttf");
    Trans trans;
    QString transDir= ":/Resur/Trans/";
