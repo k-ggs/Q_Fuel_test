@@ -11,6 +11,25 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+
+
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+add_compile_options("$<$<C_COMPILER_ID:MSVC>:/utf-8>")
+add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /UMBCS /D_UNICODE /DUNICODE")
+#thridtooltaoqucik thridtool\taoQucik
+SET(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/thridtool/taoQucik_t/cmake)
+
+
+ include(taoVersion)
+
+   add_compile_definitions(TaoCommon_NO_LIB)
+   add_subdirectory(${CMAKE_SOURCE_DIR}/thridtool/taoQucik_t/3rdparty/TaoCommon/src/TaoCommon ${CMAKE_SOURCE_DIR}/build/3rdparty/TaoCommon)
+
+  include(taoQuick)
+
+  #add_definitions(QMAKE_GEN_TAOMACRO)
+
 # QtCreator supports the following variables for Android, which are identical to qmake Android variables.
 # Check https://doc.qt.io/qt/deployment-android.html for more information.
 # They need to be set before the find_package(...) calls below.
@@ -31,7 +50,9 @@ set(PROJECT_SOURCES
         main.cpp
         qml.qrc
         Res.qrc
+        Tao_custom.qrc
 )
+
 include_directories(
     thridtool/framelesswindow_all
     thridtool/QCustomPlot/qcustomplot
@@ -44,23 +65,33 @@ file(GLOB soucres
       "thridtool/QCustomPlot/qcustomplotapi/*cpp"
     )
 
-if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(Q_Fuel_test
-        ${PROJECT_SOURCES}
 
-    )
-else()
-    if(ANDROID)
-        add_library(Q_Fuel_test SHARED
-            ${PROJECT_SOURCES}
-        )
-    else()
-        add_executable(Q_Fuel_test
-          ${PROJECT_SOURCES}
-           ${soucres}
-        )
-    endif()
-endif()
+
+        if (CMAKE_BUILD_TYPE MATCHES "Release")
+          #  add_executable(MyApp ${someSource} ${TaoQuickRes})
+            add_executable(Q_Fuel_test
+
+                  ${TaoCommonFiles}
+                ${PROJECT_SOURCES}
+               ${soucres}
+               ${framlesssrc}
+                 ${TaoQuickRes}
+            )
+        else()
+#            add_executable(MyApp ${someSource})
+             add_executable(Q_Fuel_test
+              ${PROJECT_SOURCES}
+               ${soucres}
+                ${framlesssrc}
+                   ${TaoCommonFiles}
+            )
+        endif()
+
+
+
+
+target_include_directories(Q_Fuel_test PUBLIC . ./Src ${TaoCommonPath})
+
 
 target_compile_definitions(Q_Fuel_test
   PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)

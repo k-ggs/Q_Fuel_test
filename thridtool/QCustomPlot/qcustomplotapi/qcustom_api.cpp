@@ -6,8 +6,8 @@ qcustom_api::qcustom_api(QQuickItem *parent) : QQuickPaintedItem(parent)
   m_CustomPlot = new QCustomPlot();
   m_CustomPlot->axisRect()->setBackground(QBrush(Qt::white));//背景黑色
 
-     //m_CustomPlot->setNotAntialiasedElement(QCP::AntialiasedElement::aeAll);
-    // m_CustomPlot->setNoAntialiasingOnDrag(true);
+     m_CustomPlot->setNotAntialiasedElement(QCP::AntialiasedElement::aeAll);
+     m_CustomPlot->setNoAntialiasingOnDrag(true);
      setFlag( QQuickItem::ItemHasContents, true );
      setAcceptedMouseButtons( Qt::AllButtons );
 
@@ -173,7 +173,11 @@ void qcustom_api::initCustomPlot()
   m_CustomPlot->clearItems();
   m_CustomPlot->clearMask();
 m_CustomPlot->xAxis->grid()->setVisible(false);
+  m_CustomPlot->xAxis->setSubTicks(false);
+  m_CustomPlot->yAxis2->setSubTicks(false);
 m_CustomPlot->yAxis->grid()->setVisible(false);
+
+
   connect(m_CustomPlot->yAxis2, SIGNAL(rangeChanged(QCPRange)), m_CustomPlot->yAxis, SLOT(setRange(QCPRange)));
   m_CustomPlot->yAxis2->setVisible(true);
 
@@ -184,7 +188,7 @@ m_CustomPlot->yAxis->grid()->setVisible(false);
   m_CustomPlot->axisRect()->axis(QCPAxis::atRight, 0)->setPadding(30); //
 
     mGraph1 = m_CustomPlot->addGraph(m_CustomPlot->xAxis, m_CustomPlot->axisRect()->axis(QCPAxis::atRight, 0));
-
+mGraph1->setPen(QPen(Qt::black));
     mTag1 = new AxisTag(mGraph1->valueAxis());
     mTag1->setPen(mGraph1->pen());
 
@@ -194,22 +198,19 @@ m_CustomPlot->yAxis->grid()->setVisible(false);
     m_CustomPlot->yAxis->setLabel( "V" );
 
     m_CustomPlot->graph(0)->setName(QString::fromLocal8Bit("传感器1"));
-   m_CustomPlot->legend->setVisible(false);
+   m_CustomPlot->legend->setVisible(true);
   m_CustomPlot->yAxis->setVisible(false);
-  m_CustomPlot->legend->setBorderPen(QPen());
+
    // first we create and prepare a text layout element:
-   QCPTextElement *title = new QCPTextElement(m_CustomPlot);
-   title->setText(QString::fromLocal8Bit("传感器1"));
-   title->setFont(QFont("sans", 8, QFont::Bold));
+  // QCPTextElement *title = new QCPTextElement(m_CustomPlot);
+  // title->setText(QString::fromLocal8Bit("传感器1"));
+  // title->setFont(QFont("sans", 8, QFont::Bold));
    // then we add it to the main plot layout:
-   m_CustomPlot->plotLayout()->insertRow(0); // insert an empty row above the axis rect
+  // m_CustomPlot->plotLayout()->insertRow(0); // insert an empty row above the axis rect
 
-   m_CustomPlot->plotLayout()->addElement(0, 0, title);
+  // m_CustomPlot->plotLayout()->addElement(0, 0, title);
 
- //  QCPLayoutGrid *subLayout = new QCPLayoutGrid;
-   //  m_CustomPlot->plotLayout()->addElement(0, 0, subLayout);
-    // subLayout->setMargins(QMargins(5, 0, 5, 5));
- //    subLayout->addElement(0, 0, m_CustomPlot->legend);
+
 
     m_CustomPlot ->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectAxes | QCP::iSelectLegend | QCP::iSelectPlottables);
 

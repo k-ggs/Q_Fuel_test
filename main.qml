@@ -1,4 +1,4 @@
-import QtQuick 2.12
+﻿import QtQuick 2.12
 import QtQuick.Window 2.12
 
 
@@ -97,7 +97,7 @@ onMouseYChanged: {
 }
 */
 
-FramelessWindow{
+TaoFramelessWindow{
     id: root
     visible: true
     width: 1640

@@ -16,7 +16,7 @@ Rectangle {
 
        Layout.fillWidth: true
        Layout.preferredHeight: 60
-
+/*
        RowLayout{
 
        id:it
@@ -129,8 +129,16 @@ Rectangle {
 
        }
 
+*/
+    Taotitle_ui{
+        anchors.fill: parent
+
+    }
 
        }
+
+
+
        Rectangle{
        id:content
        color: Qt.darker(title.color)

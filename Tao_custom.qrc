@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Tao_custom_Qml/Biz/CircleText.qml</file>
+        <file>Tao_custom_Qml/Biz/CloseBtn.qml</file>
+        <file>Tao_custom_Qml/Biz/ExpandBtn.qml</file>
+        <file>Tao_custom_Qml/Biz/LangBtn.qml</file>
+        <file>Tao_custom_Qml/Biz/SkinBtn.qml</file>
+        <file>Tao_custom_Qml/Dialog/AboutDialog.qml</file>
+        <file>Tao_custom_Qml/Dialog/SettingsDialog.qml</file>
+        <file>Tao_custom_Qml/Page/ControlsShow.qml</file>
+        <file>Tao_custom_Qml/Page/Home.qml</file>
+        <file>Tao_custom_Qml/Pane/ContentModel.qml</file>
+        <file>Tao_custom_Qml/Pane/LeftPane.qml</file>
+        <file>Tao_custom_Qml/Pane/RightPane.qml</file>
+        <file>Tao_custom_Qml/Pane/TitlePane.qml</file>
+    </qresource>
+</RCC>
