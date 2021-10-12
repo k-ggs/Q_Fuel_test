@@ -95,7 +95,7 @@ void qcustom_api::graphClicked(QCPAbstractPlottable *plottable, int dataIndex)
 
      QString str,strToolTip;
      str = QString::number(x_val,'g',17);
-     strToolTip += QString::fromLocal8Bit("时间(μs): ");
+     strToolTip += QString("时间(μs): ");
      strToolTip += str;
      strToolTip += "\n";
      strToolTip +=plottable->name()+ ":  ";
@@ -193,11 +193,11 @@ mGraph1->setPen(QPen(Qt::black));
     mTag1->setPen(mGraph1->pen());
 
 
-    m_CustomPlot->xAxis->setLabel(QString::fromLocal8Bit("μs") );
+    m_CustomPlot->xAxis->setLabel(QString("μs") );
 
     m_CustomPlot->yAxis->setLabel( "V" );
 
-    m_CustomPlot->graph(0)->setName(QString::fromLocal8Bit("传感器1"));
+    m_CustomPlot->graph(0)->setName(QString("传感器1"));
    m_CustomPlot->legend->setVisible(true);
   m_CustomPlot->yAxis->setVisible(false);
 
