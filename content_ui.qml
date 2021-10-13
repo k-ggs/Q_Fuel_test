@@ -365,9 +365,9 @@ legend: Legend{ font: "helvetica,-1,30,5,0,0,0,0,0,0"}
      y2[i] = domain[i]*domain[i];
     }
 
-    customPlot.addData(0, domain, y);
-     customPlot.addData(1, domain, y2);
-     customPlot.setYRange(1, {"lo":-10});
+   // customPlot.addData(0, domain, y);
+   //  customPlot.addData(1, domain, y2);
+   //  customPlot.setYRange(1, {"lo":-10});
        }
 
 }

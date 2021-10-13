@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <QtQuick>
 #include "qcustomplot.h"
@@ -50,6 +50,9 @@ private slots:
 	void onGraphClicked(QCPAbstractPlottable* plottable);
 	void onCustomReplot();
 	void onUpdateCustomPlotSize();
+
+         void timerSlot();
+         void startdemo();
 protected:
 	void routeMouseEvents(QMouseEvent* event);
 	void routeWheelEvents(QWheelEvent* event);
@@ -64,4 +67,6 @@ private:
 	ListInfo m_listInfo;
     bool m_showTag=false;
 
+
+ QTimer mDataTimer;
 };

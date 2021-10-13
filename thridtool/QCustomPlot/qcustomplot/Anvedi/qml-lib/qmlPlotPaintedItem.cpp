@@ -1,4 +1,4 @@
-#include "qmlPlotPaintedItem.h"
+﻿#include "qmlPlotPaintedItem.h"
 #include "qcustomplot.h"
 #include "qmlLabel.h"
 #include "qmlTick.h"
@@ -15,8 +15,11 @@ qmlPlotPaintedItem::qmlPlotPaintedItem(QQuickItem* parent) : QQuickPaintedItem(p
 	m_CustomPlot.setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
 	connect(&m_CustomPlot, SIGNAL(plottableClick(QCPAbstractPlottable*, QMouseEvent*)), this, SLOT(onGraphClicked(QCPAbstractPlottable*)));
 	connect(&m_CustomPlot, &QCustomPlot::afterReplot, this, &qmlPlotPaintedItem::onCustomReplot);
- m_CustomPlot.axisRect()->axis(QCPAxis::atRight, 0)->setPadding(30); //
-	m_listInfo.plot = &m_CustomPlot;
+
+
+     connect(&mDataTimer, SIGNAL(timeout()), this, SLOT(timerSlot()));
+    m_listInfo.plot = &m_CustomPlot;
+
 }
 
 void qmlPlotPaintedItem::addData(int index, QVariantList x, QVariantList y)
@@ -28,12 +31,36 @@ void qmlPlotPaintedItem::addData(int index, QVariantList x, QVariantList y)
 		xx.push_back(x[i].toReal());
 		yy.push_back(y[i].toReal());
           m_listInfo.m_graphs[index]->Tag->updatePosition(y[i].toReal());
-               m_listInfo.m_graphs[index]->Tag->setText(QString::number(y[i].toReal(), 'f', 2));
+        m_listInfo.m_graphs[index]->Tag->setText(QString::number(y[i].toReal(), 'f', 2));
 	}
 	g->addData(xx, yy);
 
 	g->rescaleAxes();
 	m_CustomPlot.replot();
+}
+void qmlPlotPaintedItem::timerSlot()
+{
+  // calculate and add a new data point to each graph:
+    int ct=m_CustomPlot.graph()->dataCount();
+    for(int i=0;i<ct;i++)
+    {
+ m_CustomPlot.graph(i)->addData( m_CustomPlot.graph(i)->dataCount(), qSin( m_CustomPlot.graph(i)->dataCount()/50.0)+qSin( m_CustomPlot.graph(i)->dataCount()/50.0/0.3843)*0.25);
+
+  // make key axis range scroll with the data:
+ m_CustomPlot.xAxis->rescale();
+   m_CustomPlot.graph(i)->rescaleValueAxis(false, true);
+
+ m_CustomPlot.xAxis->setRange( m_CustomPlot.xAxis->range().upper, 100, Qt::AlignRight);
+
+  // update the vertical axis tag positions and texts to match the rightmost data point of the graphs:
+  double graph1Value =  m_CustomPlot.graph(i)->dataMainValue( m_CustomPlot.graph(i)->dataCount()-1);
+
+   m_listInfo.m_graphs[i]->Tag->updatePosition(graph1Value);
+
+   m_listInfo.m_graphs[i]->Tag->setText(QString::number(graph1Value, 'f', 2));
+
+  m_CustomPlot.replot();
+    }
 }
 
 void SetRange(QCustomPlot& plot, int index, QVariantMap range, QCPAxis::AxisType type)
@@ -90,6 +117,7 @@ void qmlPlotPaintedItem::setBackground(QColor c)
 {
 	m_backgroundColor = c;
 	m_CustomPlot.setBackground(c);
+
 }
 
 QColor qmlPlotPaintedItem::getBackground() const
@@ -130,6 +158,8 @@ void qmlPlotPaintedItem::appendGraph(QQmlListProperty<qmlGraph> *list, qmlGraph 
 	auto& info = Info(list);
 	auto& m_CustomPlot = *info.plot;
 	info.m_graphs.append(pdt);
+
+
 
 	auto makeAxis = [&](QCPAxis* ref, QCPAxis::AxisType type, qmlAxis* qmlAx){
 		if (qmlAx)
@@ -184,7 +214,7 @@ void qmlPlotPaintedItem::appendGraph(QQmlListProperty<qmlGraph> *list, qmlGraph 
 
     //show tag
     if(pdt->istagVisible()){
-
+      qDebug()<<"showtag";
         pdt->Tag=new AxisTag(graph->valueAxis());
     }
 
@@ -269,3 +299,7 @@ void qmlPlotPaintedItem::exportPDF(const QString& name, int w/*=0*/, int h/*=0*/
 }
 
 
+void qmlPlotPaintedItem::startdemo(){
+
+    mDataTimer.start(40);
+}
