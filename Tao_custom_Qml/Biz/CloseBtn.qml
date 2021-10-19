@@ -1,6 +1,6 @@
 import QtQuick 2.9
 
-import TaoQuick 1.0
+import "../../TaoQuick"
 
 CusButton_Image {
     implicitWidth: 24

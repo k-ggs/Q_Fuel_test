@@ -1,4 +1,4 @@
-# Install script for directory: H:/ggsproject/GGS/2021/NanJing_fuel_oil_test/ggs/Q_Fuel_test/thridtool/taoQucik_t/3rdparty/TaoCommon/src/TaoCommon
+# Install script for directory: D:/vc_code/2021/NanJing_Fuel_oil_test/Q_Fuel_test/thridtool/taoQucik_t/3rdparty/TaoCommon/src/TaoCommon
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

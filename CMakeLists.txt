@@ -52,6 +52,7 @@ set(PROJECT_SOURCES
         Res.qrc
         Tao_custom.qrc
         login.qrc
+           TaoQuick/TaoQuick.qrc
 )
 
 include_directories(

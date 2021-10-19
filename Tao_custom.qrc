@@ -15,5 +15,12 @@
         <file>Tao_custom_Qml/Pane/TitlePane.qml</file>
         <file>Tao_custom_Qml/instrument/S5WDial.qml</file>
         <file>Tao_custom_Qml/Dialog/Colorpicker.qml</file>
+        <file>Tao_custom_Qml/content/Checkerboard.qml</file>
+        <file>Tao_custom_Qml/content/ColorSlider.qml</file>
+        <file>Tao_custom_Qml/content/NumberBox.qml</file>
+        <file>Tao_custom_Qml/content/Palette.qml</file>
+        <file>Tao_custom_Qml/content/Palettes.qml</file>
+        <file>Tao_custom_Qml/content/PanelBorder.qml</file>
+        <file>Tao_custom_Qml/content/SBPicker.qml</file>
     </qresource>
 </RCC>
