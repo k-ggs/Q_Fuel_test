@@ -51,6 +51,7 @@ set(PROJECT_SOURCES
         qml.qrc
         Res.qrc
         Tao_custom.qrc
+        login.qrc
 )
 
 include_directories(

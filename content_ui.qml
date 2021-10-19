@@ -240,16 +240,16 @@ Rectangle {
            id: customPlot
 
                     background : "white"
-legend: Legend{ font: "helvetica,-1,30,5,0,0,0,0,0,0"}
+                    legend: Legend{ font: "helvetica,-1,8,5,0,0,0,0,0,0"}
                     graphs : [
                         Graph {
                             name : "sin"
-                            pen : Pen { color : "blue"; width : 2.0 }
+                            pen : Pen { color : "blue"; width : 1.0 }
                             scatter : ScatterStyle {
                                 brush : "white"
                                // type : Scatter.ssCircle
-                                size : 9
-                                pen : Pen {	color : "black"; width: 1.5	}
+                                size : 1
+                                pen : Pen {	color : "black"; width: 1.0	}
                             }
                             xAxis : Axis {
                                 useDefault : true
@@ -261,46 +261,53 @@ legend: Legend{ font: "helvetica,-1,30,5,0,0,0,0,0,0"}
                                 }
                             }
                             yAxis : Axis
-                            {
+                            { visible : false
                                 label : Label {
                                     text : "sin"
-                                    font : "helvetica,-1,30,5,0,0,0,0,0,0"
+                                    font : "helvetica,-1,15,5,0,0,0,0,0,0"
                                     color : "red"
                                 }
                             }
                         },
                         Graph {
                             name : "parabola"
-                            pen : Pen { color : "red"; width : 2.0 }
+                            pen : Pen { color : "red"; width : 1.0 }
                             xAxis : Axis {
-                                useDefault : true
+                            useDefault : true
+
                             }
-                            yAxis : Axis
-                            {
-                                useDefault : false
-                            }
+                         //   yAxis : Axis
+                         //   {
+                           //     useDefault : false
+                          //  }
                         }
                     ]
 
-                    // Timer {
-                        // interval: 150; running: true; repeat: true
+                     Timer {
+                         interval: 150; running: true; repeat: true
 
-                        // property double xCurr: 0.0
+                         property double xCurr: 0.0
 
-                        // onTriggered: {
+                         onTriggered: {
 
-                            // var newX = [];
-                            // var newY = [];
-                            // for (var i = 0; i < 5; i++)
-                            // {
-                                // newX[i] = xCurr;
-                                // newY[i] = Math.sin(xCurr*Math.PI/100.0);
-                                // xCurr += i;
-                            // }
-                            // customPlot.addData(0, newX, newY);
-                            // customPlot.addData(1, newX, newY);
-                        // }
-                    // }
+                             var newX = 0.0;
+                             var newY =0.0;
+                             var newY2=0.0 ;
+                         //    for (var i = 0; i < 5; i++)
+                          //   {
+                                 newX = xCurr;
+                                 newY = Math.sin(xCurr*Math.PI/100.0);
+                                  newY2 = Math.cos(xCurr*Math.PI/100.0);
+                                 xCurr += 1;
+                                  customPlot.addData(0,  xCurr,  newY);
+                                    customPlot.addData(1,  xCurr,  newY2);
+                             console.log(xCurr)
+                          //   }
+
+
+
+                         }
+                     }
 
 
                 }
@@ -354,16 +361,16 @@ legend: Legend{ font: "helvetica,-1,30,5,0,0,0,0,0,0"}
              qcplot10.initCustomPlot()
              qcplot11.initCustomPlot()
 
-    var domain = [];
-    var y = [];
-    var y2 = [];
+  //  var domain = [];
+  //  var y = [];
+  //  var y2 = [];
 
-    for (var i=0; i<20; ++i)
-    {
-     domain[i] = i/20.0*10.0;
-     y[i] = Math.cos(domain[i]*0.8+Math.sin(domain[i]*0.16+1.0))*Math.sin(domain[i]*0.54)+1.4;
-     y2[i] = domain[i]*domain[i];
-    }
+   // for (var i=0; i<20; ++i)
+   // {
+   //  domain[i] = i/20.0*10.0;
+   //  y[i] = Math.cos(domain[i]*0.8+Math.sin(domain[i]*0.16+1.0))*Math.sin(domain[i]*0.54)+1.4;
+   //  y2[i] = domain[i]*domain[i];
+  //  }
 
    // customPlot.addData(0, domain, y);
    //  customPlot.addData(1, domain, y2);

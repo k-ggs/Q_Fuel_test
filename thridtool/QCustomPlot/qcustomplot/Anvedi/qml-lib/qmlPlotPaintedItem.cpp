@@ -20,6 +20,13 @@ qmlPlotPaintedItem::qmlPlotPaintedItem(QQuickItem* parent) : QQuickPaintedItem(p
      connect(&mDataTimer, SIGNAL(timeout()), this, SLOT(timerSlot()));
     m_listInfo.plot = &m_CustomPlot;
 
+    m_CustomPlot.axisRect()->axis(QCPAxis::atRight, 0)->setPadding(90); //
+    m_CustomPlot.xAxis->grid()->setVisible(false);
+    m_CustomPlot.xAxis->setSubTicks(false);
+    m_CustomPlot.yAxis2->setSubTicks(false);
+    m_CustomPlot.yAxis->grid()->setVisible(false);
+   //  m_CustomPlot.yAxis->setVisible(false);
+     m_CustomPlot.yAxis2->setVisible(true);
 }
 
 void qmlPlotPaintedItem::addData(int index, QVariantList x, QVariantList y)
@@ -33,11 +40,33 @@ void qmlPlotPaintedItem::addData(int index, QVariantList x, QVariantList y)
           m_listInfo.m_graphs[index]->Tag->updatePosition(y[i].toReal());
         m_listInfo.m_graphs[index]->Tag->setText(QString::number(y[i].toReal(), 'f', 2));
 	}
-	g->addData(xx, yy);
+    g->addData(xx, yy);
 
-	g->rescaleAxes();
+    g->rescaleAxes();
 	m_CustomPlot.replot();
 }
+void qmlPlotPaintedItem::addData(int index, qreal x, qreal  y)
+{
+    auto g = m_CustomPlot.graph(index);
+    //QVector<qreal> xx, yy;
+    //for (auto i = 0; i < x.size(); ++i)
+    //{
+    //	xx.push_back(x[i].toReal());
+    //	yy.push_back(y[i].toReal());
+    //      m_listInfo.m_graphs[index]->Tag->updatePosition(y[i].toReal());
+    //    m_listInfo.m_graphs[index]->Tag->setText(QString::number(y[i].toReal(), 'f', 2));
+    //}
+    g->addData(x, y);
+
+        m_listInfo.m_graphs[index]->Tag->updatePosition(y);
+        m_listInfo.m_graphs[index]->Tag->setText(QString::number(y, 'f', 2));
+    g->rescaleAxes();
+        qDebug()<<"addData_single";
+    m_CustomPlot.replot();
+}
+
+
+
 void qmlPlotPaintedItem::timerSlot()
 {
   // calculate and add a new data point to each graph:

@@ -41,8 +41,10 @@ public:
 
 public slots:
 	void addData(int index, QVariantList x, QVariantList  y);
+    void addData(int index, qreal x, qreal  y);
+
 	void setXRange(int index, QVariantMap range);
-	void setYRange(int index, QVariantMap range);
+    void setYRange(int index, QVariantMap range);
 	void exportPDF(const QString& name, int w=0, int h=0);
 
 

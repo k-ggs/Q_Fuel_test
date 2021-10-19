@@ -13,5 +13,7 @@
         <file>Tao_custom_Qml/Pane/LeftPane.qml</file>
         <file>Tao_custom_Qml/Pane/RightPane.qml</file>
         <file>Tao_custom_Qml/Pane/TitlePane.qml</file>
+        <file>Tao_custom_Qml/instrument/S5WDial.qml</file>
+        <file>Tao_custom_Qml/Dialog/Colorpicker.qml</file>
     </qresource>
 </RCC>
