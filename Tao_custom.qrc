@@ -22,5 +22,8 @@
         <file>Tao_custom_Qml/content/Palettes.qml</file>
         <file>Tao_custom_Qml/content/PanelBorder.qml</file>
         <file>Tao_custom_Qml/content/SBPicker.qml</file>
+        <file>Tao_custom_Qml/instrument/DashboardGaugeStyle.qml</file>
+        <file>Tao_custom_Qml/instrument/IconGaugeStyle.qml</file>
+        <file>Tao_custom_Qml/instrument/TachometerStyle.qml</file>
     </qresource>
 </RCC>

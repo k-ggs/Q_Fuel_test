@@ -21,10 +21,10 @@ qmlPlotPaintedItem::qmlPlotPaintedItem(QQuickItem* parent) : QQuickPaintedItem(p
     m_listInfo.plot = &m_CustomPlot;
 
     m_CustomPlot.axisRect()->axis(QCPAxis::atRight, 0)->setPadding(90); //
-    m_CustomPlot.xAxis->grid()->setVisible(false);
-    m_CustomPlot.xAxis->setSubTicks(false);
-    m_CustomPlot.yAxis2->setSubTicks(false);
-    m_CustomPlot.yAxis->grid()->setVisible(false);
+   // m_CustomPlot.xAxis->grid()->setVisible(false);
+   // m_CustomPlot.xAxis->setSubTicks(false);
+   // m_CustomPlot.yAxis2->setSubTicks(false);
+  //  m_CustomPlot.yAxis->grid()->setVisible(false);
    //  m_CustomPlot.yAxis->setVisible(false);
      m_CustomPlot.yAxis2->setVisible(true);
 }
@@ -61,7 +61,7 @@ void qmlPlotPaintedItem::addData(int index, qreal x, qreal  y)
         m_listInfo.m_graphs[index]->Tag->updatePosition(y);
         m_listInfo.m_graphs[index]->Tag->setText(QString::number(y, 'f', 2));
     g->rescaleAxes();
-        qDebug()<<"addData_single";
+   //     qDebug()<<"addData_single";
     m_CustomPlot.replot();
 }
 
@@ -107,6 +107,13 @@ void SetRange(QCustomPlot& plot, int index, QVariantMap range, QCPAxis::AxisType
 		case QCPAxis::atBottom:
 			g->keyAxis()->setRangeLower(it->toReal());
 			break;
+
+        case QCPAxis::atRight:
+            g->valueAxis()->setRangeLower(it->toReal());
+            break;
+        case QCPAxis::atTop:
+            g->keyAxis()->setRangeLower(it->toReal());
+            break;
 		}
 	}
 	it = range.find("up");
@@ -120,13 +127,72 @@ void SetRange(QCustomPlot& plot, int index, QVariantMap range, QCPAxis::AxisType
 		case QCPAxis::atBottom:
 			g->keyAxis()->setRangeUpper(it->toReal());
 			break;
+
+        case QCPAxis::atRight:
+            g->valueAxis()->setRangeUpper(it->toReal());
+            break;
+        case QCPAxis::atTop:
+            g->keyAxis()->setRangeUpper(it->toReal());
+            break;
 		}
 	}
 }
 
+
+void SetRange(QCustomPlot& plot,  QVariantMap range, QCPAxis::AxisType type)
+{
+    //auto g = plot.graph(index);
+
+    auto it = range.find("lo");
+    if (it != range.end())
+    {
+        switch (type)
+        {
+        case QCPAxis::atLeft:
+            plot.yAxis->setRangeLower(it->toReal());
+            break;
+        case QCPAxis::atBottom:
+            plot.xAxis->setRangeLower(it->toReal());
+            break;
+
+        case QCPAxis::atRight:
+           plot.yAxis2->setRangeLower(it->toReal());
+            break;
+        case QCPAxis::atTop:
+           plot.xAxis2->setRangeLower(it->toReal());
+            break;
+        }
+    }
+    it = range.find("up");
+    if (it != range.end())
+    {
+        switch (type)
+        {
+        case QCPAxis::atLeft:
+            plot.yAxis->setRangeUpper(it->toReal());
+            break;
+        case QCPAxis::atBottom:
+            plot.xAxis->setRangeUpper(it->toReal());
+            break;
+
+        case QCPAxis::atRight:
+           plot.yAxis2->setRangeUpper(it->toReal());
+            break;
+        case QCPAxis::atTop:
+           plot.xAxis2->setRangeUpper(it->toReal());
+            break;
+        }
+    }
+}
+
+
 void qmlPlotPaintedItem::setXRange(int index, QVariantMap range)
 {
 	SetRange(m_CustomPlot, index, range, QCPAxis::atBottom);
+}
+void qmlPlotPaintedItem::setRange_tpe( QVariantMap range,int typ)
+{
+    SetRange(m_CustomPlot, range, (QCPAxis::AxisType)typ);
 }
 
 void qmlPlotPaintedItem::setYRange(int index, QVariantMap range)
@@ -243,7 +309,7 @@ void qmlPlotPaintedItem::appendGraph(QQmlListProperty<qmlGraph> *list, qmlGraph 
 
     //show tag
     if(pdt->istagVisible()){
-      qDebug()<<"showtag";
+   //   qDebug()<<"showtag";
         pdt->Tag=new AxisTag(graph->valueAxis());
     }
 

@@ -4,7 +4,7 @@ import QtQuick.Controls.Styles 1.4
 import QtQuick.Extras 1.4
 import QtQuick.Extras.Private 1.0
 import QtGraphicalEffects 1.0
-import "TaoQuick"
+import "../../TaoQuick"
 CircularGauge {
     id: gauge
     property string unittxt: "Mpa"

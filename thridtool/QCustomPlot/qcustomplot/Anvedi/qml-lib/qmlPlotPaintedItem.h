@@ -45,6 +45,7 @@ public slots:
 
 	void setXRange(int index, QVariantMap range);
     void setYRange(int index, QVariantMap range);
+     void setRange_tpe( QVariantMap range,int typ);
 	void exportPDF(const QString& name, int w=0, int h=0);
 
 
