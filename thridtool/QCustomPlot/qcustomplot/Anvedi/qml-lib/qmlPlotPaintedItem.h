@@ -26,14 +26,14 @@ public:
 
 	void paint(QPainter* painter);
 	
-	QColor getBackground() const;
+  QColor getBackground() const;
 	void setBackground(QColor);
 	QQmlListProperty<qmlGraph> getGraphs();
 	qmlLegend* getLegend() const;
 	void setLegend(qmlLegend* g);
 
 
-	// support for QQmlListProperty<qmlGraph>
+    //support for QQmlListProperty<qmlGraph>
 	static void appendGraph(QQmlListProperty<qmlGraph> *list, qmlGraph *pdt);
 	static int graphSize(QQmlListProperty<qmlGraph> *p);
 	static qmlGraph *graphAt(QQmlListProperty<qmlGraph> *p, int index);

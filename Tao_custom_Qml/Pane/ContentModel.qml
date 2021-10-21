@@ -121,6 +121,7 @@ ListModel {
         visible: true
         group: "Animation"
         groupOpen: true
+
     }
 
     ListElement {

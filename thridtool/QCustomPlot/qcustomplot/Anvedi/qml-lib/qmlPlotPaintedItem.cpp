@@ -17,15 +17,15 @@ qmlPlotPaintedItem::qmlPlotPaintedItem(QQuickItem* parent) : QQuickPaintedItem(p
 	connect(&m_CustomPlot, &QCustomPlot::afterReplot, this, &qmlPlotPaintedItem::onCustomReplot);
 
 
-     connect(&mDataTimer, SIGNAL(timeout()), this, SLOT(timerSlot()));
+    connect(&mDataTimer,SIGNAL(timeout()),this,SLOT(timerSlot()));
     m_listInfo.plot = &m_CustomPlot;
 
     m_CustomPlot.axisRect()->axis(QCPAxis::atRight, 0)->setPadding(90); //
    // m_CustomPlot.xAxis->grid()->setVisible(false);
    // m_CustomPlot.xAxis->setSubTicks(false);
    // m_CustomPlot.yAxis2->setSubTicks(false);
-  //  m_CustomPlot.yAxis->grid()->setVisible(false);
-   //  m_CustomPlot.yAxis->setVisible(false);
+   // m_CustomPlot.yAxis->grid()->setVisible(false);
+   // m_CustomPlot.yAxis->setVisible(false);
      m_CustomPlot.yAxis2->setVisible(true);
 }
 
@@ -241,6 +241,7 @@ void qmlPlotPaintedItem::setLegend(qmlLegend* g)
 {
 	m_CustomPlot.legend->setVisible(true);
 	m_CustomPlot.legend->setFont(g->getFont());
+    m_CustomPlot.legend->setWrap(0);
 }
 
 inline ListInfo& Info(QQmlListProperty<qmlGraph> *list)
@@ -286,6 +287,7 @@ void qmlPlotPaintedItem::appendGraph(QQmlListProperty<qmlGraph> *list, qmlGraph 
 				{
                     //ref->setAutoTicks(false);
                   //  ref->settic
+                    //ref->settick
                     //ref->setTickVector(tickVec);
 				}
 				const auto& tickLab = tick->getTickLabels();
