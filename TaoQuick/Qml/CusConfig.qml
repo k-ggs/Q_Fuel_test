@@ -78,7 +78,7 @@ QtObject {
     property color scrollBarBackgroundColor
     property color scrollBarBackgroundColor_hovered
 
-    property int currentTheme: -1
+    property int currentTheme: 2
     onCurrentThemeChanged: {
         var t = themes.get(currentTheme)
         themeColor = t.themeColor

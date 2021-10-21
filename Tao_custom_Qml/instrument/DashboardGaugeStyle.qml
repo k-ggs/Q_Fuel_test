@@ -1,4 +1,4 @@
-/****************************************************************************
+﻿/****************************************************************************
 **
 ** Copyright (C) 2016 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
@@ -63,7 +63,9 @@ CircularGaugeStyle {
     property real needleTipWidth: toPixels(0.02)
     property real needleBaseWidth: toPixels(0.06)
     property bool halfGauge: false
-
+    property string txt_Unit: "km/h"
+    property color txt_color: "white"
+    property color bk_color: "black"
     function toPixels(percentage) {
         return percentage * outerRadius;
     }
@@ -84,13 +86,13 @@ CircularGaugeStyle {
         }
 
         ctx.beginPath();
-        ctx.fillStyle = "black";
+        ctx.fillStyle = bk_color;
         ctx.ellipse(0, 0, ctx.canvas.width, ctx.canvas.height);
         ctx.fill();
 
         ctx.beginPath();
         ctx.lineWidth = tickmarkInset;
-        ctx.strokeStyle = "black";
+        ctx.strokeStyle = bk_color;
         ctx.arc(xCenter, yCenter, outerRadius - ctx.lineWidth / 2, outerRadius - ctx.lineWidth / 2, 0, Math.PI * 2);
         ctx.stroke();
 
@@ -121,7 +123,7 @@ CircularGaugeStyle {
             id: speedText
             font.pixelSize: toPixels(0.3)
             text: kphInt
-            color: "white"
+            color: txt_color
             horizontalAlignment: Text.AlignRight
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.verticalCenter
@@ -130,9 +132,9 @@ CircularGaugeStyle {
             readonly property int kphInt: control.value
         }
         Text {
-            text: "km/h"
-            color: "white"
-            font.pixelSize: toPixels(0.09)
+            text: txt_Unit
+            color: txt_color
+            font.pixelSize: toPixels(0.19)
             anchors.top: speedText.bottom
             anchors.horizontalCenter: parent.horizontalCenter
         }

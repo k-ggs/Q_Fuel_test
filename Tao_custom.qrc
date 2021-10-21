@@ -25,5 +25,7 @@
         <file>Tao_custom_Qml/instrument/DashboardGaugeStyle.qml</file>
         <file>Tao_custom_Qml/instrument/IconGaugeStyle.qml</file>
         <file>Tao_custom_Qml/instrument/TachometerStyle.qml</file>
+        <file>Tao_custom_Qml/instrument/TurnIndicator.qml</file>
+        <file>Tao_custom_Qml/instrument/ValueSource.qml</file>
     </qresource>
 </RCC>

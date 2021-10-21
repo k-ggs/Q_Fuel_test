@@ -18,7 +18,7 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter
             font.pixelSize: 28
             font.bold: true
-            text: qsTr("maximize")
+            text: qsTr("数据采集控制系统模板")
             color: "#ffffff"
         }
     }
